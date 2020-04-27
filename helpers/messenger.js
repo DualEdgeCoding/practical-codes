@@ -2,16 +2,16 @@
 const flashMessage = (resp, type, message, icon, dismissable) => {
     let alert;
     switch(type){
-        case "success":
+        case 'success':
             alert = resp.flashMessenger.success(message);
             break;
-        case "error":
+        case 'error':
             alert = resp.flashMessenger.error(message);
             break;
-        case "info":
+        case 'info':
             alert = resp.flashMessenger.info(message);
             break;
-        case "danger":
+        case 'danger':
             alert = resp.flashMessenger.danger(message);
             break;
         default:

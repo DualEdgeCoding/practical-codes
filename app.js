@@ -11,6 +11,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const flash = require("connect-flash");
 const FlashMessenger = require('flash-messenger');
+const {allowInsecurePrototypeAccess} = require("@handlebars/allow-prototype-access");
+const handlebars = require("handlebars");
 /*
 * Loads routes file main.js in routes directory. The main.js determines which function
 * will be called based on the HTTP request and URL.
@@ -35,7 +37,8 @@ const app = express();
 *
 * */
 app.engine('handlebars', exphbs({
-	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
+	defaultLayout: 'main', // Specify default template views/layout/main.handlebar 
+	handlebars: allowInsecurePrototypeAccess(handlebars)
 }));
 app.set('view engine', 'handlebars');
 
@@ -62,19 +65,11 @@ app.use(session({
 	saveUninitialized: false,
 }));
 
-// Place to define global variables - not used in practical 1
-app.use(function (req, res, next) {
-	next();
-});
-
 // Use Routes
 /*
 * Defines that any root URL with '/' that Node JS receives request from, for eg. http://localhost:5000/, will be handled by
 * mainRoute which was defined earlier to point to routes/main.js
 * */
-app.use('/', mainRoute); // mainRoute is declared to point to routes/main.js
-// This route maps the root URL to any path defined in main.js
-app.use("/user", user)
 
 // instantiate new connect-flash object and use in app.
 app.use(flash());
@@ -84,6 +79,10 @@ app.use(FlashMessenger.middleware);
 app.use((req, res, next) => {
 	next();
 });
+
+app.use('/', mainRoute); // mainRoute is declared to point to routes/main.js
+// This route maps the root URL to any path defined in main.js
+app.use("/user", user);
 
 /*
 * Creates a unknown port 5000 for express server since we don't want our app to clash with well known
