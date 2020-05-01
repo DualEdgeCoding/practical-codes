@@ -2,13 +2,7 @@ const express = require("express");
 const router = express.Router();
 const moment = require("moment");
 const Video = require("../models/Video");
-
-function ensureLoggedIn(req, res, next){
-    if(req.isAuthenticated()) return next();
-
-    req.flash("errorMsg", "You need to be logged in.");
-    res.redirect("/login");
-}
+const ensureLoggedIn = require("../config/ensureLogIn");
 
 router.get("/listVideos", ensureLoggedIn, (req, res) => {
     Video.findAll({
@@ -50,11 +44,16 @@ router.post("/addVideo", (req, res) => {
     });
 });
 
-router.get("/edit/:id", (req, res) => {
+router.get("/edit/:id", ensureLoggedIn, (req, res) => {
     Video.findOne({where: {id: req.params.id}})
     .then(video => {
+        if(video.userId != req.user.id) {
+            req.flash("errorMsg", "You do not have access to this video.");
+            res.redirect("/");
+        } else {
         checkOptions(video);
         res.render("video/editVideo", {video});
+        }
     })
     .catch(err => {
         console.error(err);
