@@ -2,9 +2,11 @@
 <div class="container">
 	<div class="card card-body">
 		<h3>Add Video Jot</h3>
-		<form action="" method="post" id="addVideo">
+		<form action="/video/addVideo" method="post" id="addVideo">
 			<div class="form-group">
 				{{!-- Practical 5 Exercise 2: Add a title input text here named 'title'--}}
+				<label for="title">Title</label>
+				<input type="text" name="title" class="form-control">
 			</div>
 			<div class="form-group mb-4">
 				<label class="font-italic" for="story">Story</label>
@@ -21,6 +23,22 @@
 						<label class="font-italic">Language</label>
 						<br>
 					{{!-- Practical 5 Exercise 2: Language radio buttons here'--}}
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="chinese" value="chinese">
+							<label class="form-check-label" for="chinese">Chinese</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="english" value="english" checked>
+							<label class="form-check-label" for="english">English</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="malay" value="malay">
+							<label class="form-check-label" for="malay">Malay</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="checkbox" name="language" id="tamil" value="tamil">
+							<label class="form-check-label" for="tamil">Tamil</label>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -31,19 +49,19 @@
 						<label class="font-italic">Subtitles</label>
 						<br>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="subtitles" id="chinese" value="Chinese">
+							<input class="form-check-input" type="checkbox" name="subtitles" id="chinese" value="chinese">
 							<label class="form-check-label" for="chinese">Chinese</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="subtitles" id="english" value="English">
-							<label class="form-check-label" for="englishLang">English</label>
+							<input class="form-check-input" type="checkbox" name="subtitles" id="english" value="english">
+							<label class="form-check-label" for="english">English</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="subtitles" id="malay" value="Malay">
+							<input class="form-check-input" type="checkbox" name="subtitles" id="malay" value="malay">
 							<label class="form-check-label" for="malay">Malay</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="subtitles" id="tamil" value="Tamil">
+							<input class="form-check-input" type="checkbox" name="subtitles" id="tamil" value="tamil">
 							<label class="form-check-label" for="tamil">Tamil</label>
 						</div>
 						{{!--<div class="form-check form-check-inline">
@@ -94,7 +112,7 @@
 <script>
 		$('#datepicker').datepicker({
 			format: 'dd/mm/yyyy',
-			value: new Date().toLocaleDateString('en-AUS'),
+			value: new Date().toLocaleDateString('en-SG'),
 			uiLibrary: 'bootstrap4',
 		});
 </script>

@@ -1,7 +1,3 @@
-/*
-* 'require' is similar to import used in Java and Python. It brings in the libraries required to be used
-* in this JS file.
-* */
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -16,15 +12,22 @@ const handlebars = require("handlebars");
 const db = require("./config/dbConnection");
 const mySqlStore = require("express-mysql-session");
 const passport = require("passport");
+const moment = require("moment");
 
 const mainRoute = require('./routes/main');
-const user = require("./routes/user")
+const user = require("./routes/user");
+const video = require("./routes/video");
 
 const app = express();
 
 app.engine('handlebars', exphbs({
 	defaultLayout: 'main',
-	handlebars: allowInsecurePrototypeAccess(handlebars)
+	handlebars: allowInsecurePrototypeAccess(handlebars),
+	helpers: {
+		formatDate: (date, targetFormat) => {
+			return moment(date).format(targetFormat);
+		}
+	}
 }));
 app.set('view engine', 'handlebars');
 
@@ -53,14 +56,17 @@ app.use(session({
 		expiration: 900000
 	}),
 	resave: false,
-	saveUninitialized: false,
+	saveUninitialized: false
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(flash());
 app.use(FlashMessenger.middleware);
-app.use(function(req, res, next){
-	res.locals.successMsg = req.flash('success_msg');
-	res.locals.errorMsg = req.flash('error_msg');
+app.use((req, res, next) => {
+	res.locals.successMsg = req.flash('successMsg');
+	res.locals.errorMsg = req.flash('errorMsg');
 	res.locals.error = req.flash('error');
 	res.locals.user = req.user || null;
 	next();
@@ -70,16 +76,10 @@ db.setUpDb(false);
 
 const authenticate = require("./config/passport");
 authenticate.localStrategy(passport);
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use((req, res, next) => {
-	next();
-});
 
 app.use('/', mainRoute); 
 app.use("/user", user);
-app.use("/video", require("./routes/video"));
+app.use("/video", video);
 
 const port = 5000;
 app.listen(port, () => {
