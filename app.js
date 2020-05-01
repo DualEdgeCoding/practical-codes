@@ -26,6 +26,9 @@ app.engine('handlebars', exphbs({
 	helpers: {
 		formatDate: (date, targetFormat) => {
 			return moment(date).format(targetFormat);
+		},
+		radioCheck: (val, radio) => {
+			if(val == radio) return "checked";
 		}
 	}
 }));
