@@ -24,21 +24,22 @@
 						<br>
 					{{!-- Practical 5 Exercise 2: Language radio buttons here'--}}
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="chinese" value="chinese">
+							<input class="form-check-input" type="checkbox" name="language" id="chinese" value="chinese" onclick="checkLastLanguage()">
 							<label class="form-check-label" for="chinese">Chinese</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="english" value="english" checked>
+							<input class="form-check-input" type="checkbox" name="language" id="english" value="english" onclick="checkLastLanguage()" checked>
 							<label class="form-check-label" for="english">English</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="malay" value="malay">
+							<input class="form-check-input" type="checkbox" name="language" id="malay" value="malay" onclick="checkLastLanguage()">
 							<label class="form-check-label" for="malay">Malay</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="tamil" value="tamil">
+							<input class="form-check-input" type="checkbox" name="language" id="tamil" value="tamil" onclick="checkLastLanguage()">
 							<label class="form-check-label" for="tamil">Tamil</label>
 						</div>
+						<p class="font-weight-bold text-info" id="languageErr" style="display:none">Please select one language</p>
 					</div>
 				</div>
 			</div>
@@ -103,8 +104,7 @@
 
 			</div>
 			<br>
-			<button id="butAddVideo" type="submit" class="btn btn-primary">Save
-			</button>
+			<button id="btnSubmit" type="submit" class="btn btn-primary">Save</button>
 		</form>
 	</div>
 </div>

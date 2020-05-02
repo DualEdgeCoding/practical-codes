@@ -29,6 +29,10 @@ app.engine('handlebars', exphbs({
 		},
 		radioCheck: (val, radio) => {
 			if(val == radio) return "checked";
+		},
+		displaySubLang: (list) => {
+			if(list == "") return "None";
+			return list.replace(/,/g, " | ");
 		}
 	}
 }));

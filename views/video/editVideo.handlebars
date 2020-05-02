@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="card card-body">
 		<h3>Edit Video Jot</h3>
-		<form action="/video/edit/{{video.id}}?_method=PUT" method="post" id="addVideo">
+		<form action="/video/edit/{{video.id}}?_method=PUT" method="post">
 			<div class="form-group">
 				{{!-- Practical 5 Exercise 2: Add a title input text here named 'title'--}}
 				<label for="title">Title</label>
@@ -23,21 +23,22 @@
 						<br>
 					{{!-- Practical 5 Exercise 2: Language radio buttons here'--}}
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="chinese" value="chinese" {{video.chineseLang}}>
+							<input class="form-check-input" type="checkbox" name="language" id="chinese" value="chinese" onclick="checkLastLanguage()" {{video.chineseLang}}>
 							<label class="form-check-label" for="chinese">Chinese</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="english" value="english" {{video.englishLang}}>
+							<input class="form-check-input" type="checkbox" name="language" id="english" value="english" onclick="checkLastLanguage()" {{video.englishLang}}>
 							<label class="form-check-label" for="english">English</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="malay" value="malay" {{video.malayLang}}>
+							<input class="form-check-input" type="checkbox" name="language" id="malay" value="malay" onclick="checkLastLanguage()" {{video.malayLang}}>
 							<label class="form-check-label" for="malay">Malay</label>
 						</div>
 						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="checkbox" name="language" id="tamil" value="tamil" {{video.tamilLang}}>
+							<input class="form-check-input" type="checkbox" name="language" id="tamil" value="tamil" onclick="checkLastLanguage()" {{video.tamilLang}}>
 							<label class="form-check-label" for="tamil">Tamil</label>
 						</div>
+						<p class="font-weight-bold text-info" id="languageErr" style="display:none">Please select one language</p>
 					</div>
 				</div>
 			</div>
@@ -102,8 +103,7 @@
 
 			</div>video.
 			<br>
-			<button id="butAddVideo" type="submit" class="btn btn-primary">Save
-			</button>
+			<button id="btnSubmit" type="submit" class="btn btn-primary">Save</button>
 		</form>
 	</div>
 </div>
