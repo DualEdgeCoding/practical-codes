@@ -28,6 +28,8 @@ router.post("/addVideo", (req, res) => {
     let subtitles = req.body.subtitles == undefined ? "": req.body.subtitles.toString();
     let classification = req.body.classification;
     let userId = req.user.id;
+    let poster = req.body.posterURL;
+    let starring = req.body.starring;
 
     Video.create({
        title,
@@ -36,7 +38,9 @@ router.post("/addVideo", (req, res) => {
        language,
        subtitles,
        classification,
-       userId
+       userId,
+       poster,
+       starring
     }).then(video => res.redirect("/video/listVideos"))
     .catch(err => {
         console.error(err);
@@ -68,13 +72,17 @@ router.put("/edit/:id", (req, res) => {
     let language = req.body.language.toString();
     let subtitles = req.body.subtitles == undefined ? "": req.body.subtitles.toString();
     let classification = req.body.classification;
+    let starring = req.body.starring;
+    let poster = req.body.posterURL.src;
     Video.update({
         title,
         story,
         dateRelease,
         language,
         subtitles,
-        classification
+        classification,
+        starring,
+        poster
     }, {
         where: {id: req.params.id}
     }).then(() => {

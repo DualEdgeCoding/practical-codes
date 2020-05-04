@@ -9,27 +9,42 @@
 				</div>
 				<div class="card-body">
 					<div class="row">
-						<div class="col-sm-12 col-md-12 col-lg-3">
+						<div class="col-sm-12 col-md-12 col-lg-2">
+						<a href="{{poster}}" data-title="{{title}}" data-toggle="lightbox">
+							<img src="{{poster}}" alt="Poster unavailable" class="img-thumbnail img-fluid">
+						</a>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-8">
+							<div class="row">
+							<div class="col-sm-12 col-md-6 col-lg-3">
 							<p class="font-italic">Subtitles</p>
 							<p class="text-info">
 								{{displaySubLang subtitles}}
 							</p>
 						</div>
-						<div class="col-sm-12 col-md-12 col-lg-3">
+						<div class="col-sm-12 col-md-6 col-lg-3">
 							<p class="font-italic">Language</p>
 							<p class="text-info">
 								{{displaySubLang language}}
 							</p>
 						</div>
-						<div class="col-sm-12 col-md-12 col-lg-2">
+						<div class="col-sm-12 col-md-6 col-lg-2">
 							<p class="font-italic">Classification</p>
 							<p class="text-info">{{classification}}</p>
 						</div>
-						<div class="col-sm-12 col-md-12 col-lg-2">
+						<div class="col-sm-12 col-md-6 col-lg-2">
 							<p class="font-italic">Date Release</p>
 							<p class="text-info">{{formatDate dateRelease "DD MMM YYYY"}}</p>
 						</div>
-						<div class="col-sm-12 col-md-12 col-lg-2">
+						</div>
+						<div class="row">
+							<div class="col-sm-12 col-md-6 col-lg-10">
+								<p class="font-italic">Starring</p>
+								<p class="text-info">{{starring}}</p>
+							</div>
+						</div>
+						</div>
+						<div class="col-sm-12 col-md-6 col-lg-2">
 							<p class="font-italic"></p>
 							<a href="/video/edit/{{id}}" class="card-link">
 								<i class="fas fa-pencil-alt"></i>
@@ -41,10 +56,7 @@
 								Delete
 							</a>
 						</div>
-					</div>
-
 				</div>
-
 				<div class="accordion" id="storyAccordion">
 					<div class="card-header" id="heading{{id}}">
 						<button class="btn btn-link" type="button" data-toggle="collapse"
@@ -55,7 +67,6 @@
 						</button>
 
 					</div>
-
 					<div id="collapse{{id}}" class="collapse" aria-labelledby="heading{{id}}"
 						 data-parent="#storyAccordion"
 					>
@@ -65,9 +76,8 @@
 					</div>
 				</div>
 			</div>
+			</div>
 		{{/each}}
-	</div>
-
 </div>
 {{else}}
 	<h3>No videos jotted</h3>

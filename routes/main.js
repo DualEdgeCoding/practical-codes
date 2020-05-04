@@ -15,8 +15,6 @@ router.get('/login', (req, res) => {
 
 router.get('/about', (req, res) => {
 	var author = "Weebkun";
-	alertMessage(res, 'success',
-	'This is an important message', 'fas fa-sign-in-alt', true);
 	res.render("about", {
 		author : author
 	});
