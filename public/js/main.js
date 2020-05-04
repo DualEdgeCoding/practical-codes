@@ -1,5 +1,3 @@
-const moment = require("moment");
-
 function checkLastLanguage(){
     let languages = document.getElementsByName("language");
     let error = document.getElementById("languageErr");
@@ -27,7 +25,6 @@ function getMovie(){
 
     fetch(`https://www.omdbapi.com/?t=${title}&apikey=88ec6fee`)
     .then(res => {
-        console.log(res);
         return res.json();
     })
     .then(data => {
