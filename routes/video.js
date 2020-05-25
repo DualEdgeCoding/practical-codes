@@ -3,6 +3,8 @@ const router = express.Router();
 const moment = require("moment");
 const Video = require("../models/Video");
 const ensureLoggedIn = require("../config/ensureLogIn");
+const fs = require("fs");
+const upload = require("../helpers/imageUpload");
 
 router.get("/listVideos", ensureLoggedIn, (req, res) => {
     Video.findAll({
@@ -92,6 +94,21 @@ router.put("/edit/:id", (req, res) => {
     .catch(err => {
         console.error(err);
         res.sendStatus(500);
+    });
+});
+
+router.post("/upload", ensureLoggedIn, (req, res) => {
+    if(!fs.existsSync(`./public/uploads/${req.user.id}`)) fs.mkdirSync(`./public/uploads/${req.user.id}`);
+    upload(req, res, err => {
+        if(err){
+            res.json({file: "/img/no-image.jpg", err});
+        } else {
+            if(req.file === undefined){
+                res.json({file: "/img/no-image.jpg", err});
+            } else {
+                res.json({file: `/uploads/${req.user.id}/${req.file.filename}`});
+            }
+        }
     });
 });
 

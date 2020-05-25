@@ -22,17 +22,17 @@
 								{{displaySubLang subtitles}}
 							</p>
 						</div>
-						<div class="col-sm-12 col-md-6 col-lg-3">
+						<div class="col-sm-12 col-md-6 col-lg-4">
 							<p class="font-italic">Language</p>
 							<p class="text-info">
 								{{displaySubLang language}}
 							</p>
 						</div>
 						<div class="col-sm-12 col-md-6 col-lg-2">
-							<p class="font-italic">Classification</p>
+							<p class="font-italic">Class</p>
 							<p class="text-info">{{classification}}</p>
 						</div>
-						<div class="col-sm-12 col-md-6 col-lg-2">
+						<div class="col-sm-12 col-md-6 col-lg-3">
 							<p class="font-italic">Date Release</p>
 							<p class="text-info">{{formatDate dateRelease "DD MMM YYYY"}}</p>
 						</div>
@@ -68,8 +68,7 @@
 
 					</div>
 					<div id="collapse{{id}}" class="collapse" aria-labelledby="heading{{id}}"
-						 data-parent="#storyAccordion"
-					>
+						 data-parent="#storyAccordion">
 						<div class="card-body">
 						  {{story}}
 						</div>

@@ -52,3 +52,25 @@ function capitalise(){
     });
     title.value = newTitle.join(" ");
 }
+
+$("#posterUpload").on("change", () => {
+    let form = new FormData();
+    form.append("posterUpload", $("#posterUpload")[0].files[0]);
+    $.ajax({
+        url: "/video/upload",
+        type: "POST",
+        data: form,
+        contentType: false,
+        processData: false,
+        "success": data => {
+            $("#poster").attr("src", data.file);
+            $("#posterURL").attr("value", data.file);
+            if(data.err){
+                $("#posterErr").show();
+                $("#posterErr").text(data.err.message);
+            } else {
+                $("#posterErr").hide();
+            }
+        }
+    })
+});
